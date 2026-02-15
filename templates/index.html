@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Application Tracker</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h1>Job Application Tracker</h1>
+
+<form action="/add" method="POST">
+    <input type="text" name="company" placeholder="Company" required>
+    <input type="text" name="role" placeholder="Role" required>
+
+    <select name="status">
+        <option value="Applied">Applied</option>
+        <option value="Interview">Interview</option>
+        <option value="Rejected">Rejected</option>
+        <option value="Offer">Offer</option>
+    </select>
+
+    <input type="date" name="date_applied" required>
+
+    <button type="submit">Add Application</button>
+</form>
+
+<hr>
+
+<table border="1">
+    <tr>
+        <th>Company</th>
+        <th>Role</th>
+        <th>Status</th>
+        <th>Date</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for app in applications %}
+    <tr>
+        <td>{{ app[1] }}</td>
+        <td>{{ app[2] }}</td>
+        <td>{{ app[3] }}</td>
+        <td>{{ app[4] }}</td>
+        <td>
+            <a href="/update/{{ app[0] }}">Mark Interview</a> |
+            <a href="/delete/{{ app[0] }}">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
